@@ -98,51 +98,67 @@ h4 {
     h2 {
         letter-spacing: -0.1rem;
 
-        @include mobile{
+        @include mobile {
             font-size: 22px;
         }
     }
 
     // ---------search-----------
-    .search-button{
+    .search-button {
         z-index: 2;
-        img{width:20px; height: 20px;}
+        img {
+            width: 20px;
+            height: 20px;
+        }
     }
 
-    .search-menu{
+    .search-menu {
         z-index: 1;
-        display: none;
-        position: absolute;
-        top:0; left:0;
+        position: fixed;
+        transform: translateX(-100%);
+        transition: 0.5s;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100vh;
         background: #fff;
         padding: 20px;
 
-        div{margin: 40px 0;}
-
-        .search-title{
-            p {@include font-400(24px)}
+        div {
+            margin: 40px 0;
         }
 
-        .search-input{
+        .search-title {
+            p {
+                @include font-400(24px)
+            }
+        }
+
+        .search-input {
             padding-bottom: 10px;
             border-bottom: 1px solid #000;
             @include flex();
-            input {border-width: 0; outline: none;}
-            button{
-                width: 20px; height: 20px;
-                border-width: 0; outline: none;
-                background : url('../../imgs/ic-search.png');
+
+            input {
+                border-width: 0;
+                outline: none;
+            }
+
+            button {
+                width: 20px;
+                height: 20px;
+                border-width: 0;
+                outline: none;
+                background: url('../../imgs/ic-search.png');
                 background-color: #fff;
                 background-repeat: no-repeat;
             }
         }
 
-        .search-recommend{
+        .search-recommend {
             p {}
 
-            span{
+            span {
                 display: inline-block;
                 margin-top: 20px;
 
@@ -154,25 +170,27 @@ h4 {
                     transition: 0.5s;
                 }
 
-                a:hover{
+                a:hover {
                     color: #fff;
                     background-color: #000;
                 }
             }
-            
+
         }
 
     }
 
-    .search-menu.active{
+    .search-menu.active {
+        transform: translateX(0%);
         display: block;
+        z-index: 1;
     }
 
     // ----------burger----------
     .burger-button {
         width: 15px;
         height: 15px;
-       
+
         position: relative;
 
         @include flex() {
@@ -185,95 +203,117 @@ h4 {
             height: 2px;
             background-color: #000;
             position: absolute;
-            top: 50%; left: 0;
+            top: 50%;
+            left: 0;
             transition: 0.5s;
-            &:nth-child(1){
+
+            &:nth-child(1) {
                 transform: translateY(-6px);
             }
-            &:nth-child(3){
+
+            &:nth-child(3) {
                 transform: translateY(6px);
             }
         }
     }
-    
+
     .burger-button.active {
-        z-index: 1;
-        p:nth-child(1){
+        z-index: 2;
+
+        p:nth-child(1) {
             transform: rotate(45deg) translateY(0px);
         }
-        p:nth-child(2){display: none;} 
-        p:nth-child(3){
+
+        p:nth-child(2) {
+            display: none;
+        }
+
+        p:nth-child(3) {
             transform: rotate(-45deg) translateY(0px);
         }
     }
 
-    .burger-menu{
-        display: none;
-        transform: translateX(100%);
+    .burger-menu {
+        transform: translateX(120%);
         transition: 0.5s;
 
-        position: absolute;
-        top: 0;
-        right: 0;
+        position: fixed;
+        top: 0; right: 0;
+        z-index: 1;
         width: 70%;
         height: 100vh;
         background-color: white;
         padding: 60px 20px;
-    
-        .burger-menu-container{
+        box-shadow: 40px 40px 40px 40px gray;
+
+        .burger-menu-container {
             height: 100%;
 
-            @include flex(){
+            @include flex() {
                 flex-direction: column;
                 justify-content: space-between
             }
-            .burger-menu-list{
-                p{
+
+            .burger-menu-list {
+                p {
                     @include font-400(18px);
                     padding-bottom: 8px;
                     border-bottom: 1px solid #000;
                 }
-            
+
                 .menu {
-                        @include flex{align-items: center;}
-                        padding: 10px 0;
-            
-                        img{
-                            width: 18px;
-                            height: 18px;
-                            opacity: 0.5;
-                        }
-        
-                        img.active{transform: rotate(180deg);}
+                    @include flex {
+                        align-items: center;
                     }
-        
-                .sub { display: none;}
+
+                    padding: 10px 0;
+
+                    img {
+                        width: 18px;
+                        height: 18px;
+                        opacity: 0.5;
+                    }
+
+                    img.active {
+                        transform: rotate(180deg);
+                    }
+                }
+
+                .sub {
+                    display: none;
+                }
+
                 .sub.active {
                     display: block;
                     padding-bottom: 20px;
-                    li{
-                        a{
+
+                    li {
+                        a {
                             color: gray;
                             font-size: 14px;
                         }
+
                         padding-bottom: 10px;
                     }
                 }
             }
-    
-            .user-icons{
-                @include flex(){
+
+            .user-icons {
+                @include flex() {
                     justify-content: space-between;
                 }
 
-                a{
-                    img{width: 20px; height: 20px;}
+                a {
+                    img {
+                        width: 20px;
+                        height: 20px;
+                    }
                 }
             }
         }
     }
 
-    .burger-menu.active {
+    .burger-menu.toggle {
         display: block;
         transform: translateX(0%);
     }
@@ -287,7 +327,10 @@ h4 {
 
 // -----------footer-----------
 .footer-nav {
-    @include mobile{display:none;}
+    @include mobile {
+        display: none;
+    }
+
     background-color: gainsboro;
     border-top: 1px solid #000;
     padding: 20px 0;
@@ -305,7 +348,10 @@ h4 {
 }
 
 .footer-sub {
-    @include mobile{display:none;}
+    @include mobile {
+        display: none;
+    }
+
     max-width: 1540px;
     margin: auto;
     padding: 40px 0;
@@ -350,21 +396,65 @@ h4 {
     .sns-icons {}
 }
 
-.footer-mobile{
+.footer-mobile {
     display: none;
-    @include mobile{display:block;}
-    background-color: gainsboro;
+
+    @include mobile {
+        display: block;
+    }
+
+    background-color: #fff;
     padding: 20px 0;
     text-align: center;
 
-    strong{
+    strong {
         @include font-700(13px);
         display: block;
         padding-bottom: 3px;
     }
 
-    p{
+    p {
         @include font-400(10px);
-        color : gray;
+        color: gray;
     }
+}
+
+// ----------- aside --------------
+aside {
+    opacity: 0;
+    transition: 0.2s;
+
+    div {
+        width: 48px;
+        height: 48px;
+        background-color: gray;
+        border-radius: 50%;
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+
+        svg {
+            fill: #fff;
+            transform: rotate(180deg);
+        }
+    }
+
+    &.active {
+        opacity: 1;
+    }
+}
+
+//-----------observe-----------
+.observe {
+    opacity: 0;
+    transform: translateY(20%);
+    transition: 1s;
+    @include mobile{
+        transform: translateY(10%); 
+    }
+}
+
+.observe.active {
+    opacity: 1;
+    transform: translateY(0);
 }

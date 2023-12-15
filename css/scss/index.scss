@@ -10,14 +10,15 @@ main {
     }
 
     .new-collection {
-        @include mobile{display: none;}
         margin: 140px auto;
         max-width: 1540px;
+        @include mobile{margin: 60px auto;}
 
         h3 {
             font-size : 36px;
             font-weight: 400;
             text-align: center;
+            @include mobile{font-size: 18px;}
         }
 
         .new-collection-contents {
@@ -25,12 +26,18 @@ main {
             display: flex;
             gap: 20px;
 
+            @include mobile{
+                flex-direction: column;
+                margin-top: 20px;
+            }
+
             div{
                 width: 500px;
                 display: flex;
                 flex-wrap: nowrap;
                 flex-direction: column;
                 gap: 20px;
+                @include mobile{width:100%;}
             }
 
             p{
